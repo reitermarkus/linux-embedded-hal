@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ssh_host="pi@10.0.0.178"
+binary_name="$(basename "${1}")"
+remote_path="/tmp/${binary_name}"
+
+scp "${1}" "${ssh_host}:${remote_path}"
+ssh -t "${ssh_host}" "sudo '${remote_path}'"
